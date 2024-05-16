@@ -1,0 +1,54 @@
+//event registration
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
+class EventRegistrationScreen extends StatefulWidget {
+  const EventRegistrationScreen({Key? key}) : super(key: key);
+
+  @override
+  _EventRegistrationScreenState createState() => _EventRegistrationScreenState();
+}
+
+class _EventRegistrationScreenState extends State<EventRegistrationScreen> {
+  File? _image; // Variable _image definida aquí
+
+  // Función para seleccionar una foto desde la galería
+  Future<void> _getImage() async {
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('imagen no seleccionada.');
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Registro de Evento'),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            // Aquí irán los campos para ingresar la información del evento
+            // Ejemplo: TextFormField, DatePicker, ImagePicker, AudioRecorder, etc.
+            // Agrega también un botón para guardar el evento
+
+            // Botón para seleccionar una foto
+            ElevatedButton(
+              onPressed: () => _getImage(), // Llama al método _getImage de la clase _EventRegistrationScreenState
+              child: const Text('Seleccionar Foto'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
